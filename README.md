@@ -10,6 +10,6 @@
 - [EndGameZoneSystem](Systems/GameLogic/EndGameZoneSystem.cs) - система для определения завершения игры, срабатывает только в случае, если объект находясь в зоне-триггере имеет контакт с каким-либо другим объектом, с которым он не может быть объединен.
 - [SaveSystem](Systems/SavePlayer/SavePlayerSystem.cs) - система сохранения данных игрока.
 - [ObjectSystems](Systems/SceneObjects) - системы игровых объектов (детект возможности объединения, абилки уничтожения, апгрейда, перемешивания).
-- [SoundSystems](Systems/Sounds/FXSoundSystem.cs) - системы для управления звуками в игре.
+- [SoundSystems](Systems/Sounds/FXSoundSystem.cs) - системы для управления звуками в игре. 
 
 ![изображение](https://github.com/user-attachments/assets/e12bdcfc-74c8-4478-95af-c9ed2aae3206)
