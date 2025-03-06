@@ -5,7 +5,7 @@
 Реализована на фреймворке HECS (гибридная ECS). В основе глобальная стейт система управляющая переходами между состояниями игры. Разрабатывалась в течении 2-х недель командой из двух человек. В данном проекте я по большей части занимался внутренней логикой игры, практически не касаясь работы с UI. Для аналитики использовалась GameAnalytics.
 
 - [Yandex](Features/YandexSystem) - системы, jslib и компоненты связанные с работой SDK Yndex, все полностью самописное.
-- [GameAnalytics](Systems/GameAnalytics/GameAnalyticsSystem.cs) - система гейм аналитики.
+- [GameAnalytics](Systems/GameAnalytics/GameAnalyticsSystem.cs) - система гейм аналитики. 
 - [MergeSystem](Systems/GameLogic/MergeSystem.cs) - система объединения объектов.
 - [EndGameZoneSystem](Systems/GameLogic/EndGameZoneSystem.cs) - система для определения завершения игры, срабатывает только в случае, если объект находясь в зоне-триггере имеет контакт с каким-либо другим объектом, с которым он не может быть объединен.
 - [SaveSystem](Systems/SavePlayer/SavePlayerSystem.cs) - система сохранения данных игрока.
