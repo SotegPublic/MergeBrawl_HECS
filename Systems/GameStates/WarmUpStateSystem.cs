@@ -6,6 +6,7 @@ using Components;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Commands;
+using UnityEngine.AddressableAssets;
 
 namespace Systems
 {
@@ -43,8 +44,13 @@ namespace Systems
         protected async override void ProcessState(int from, int to)
         {
             WarmUpViews();
-
             await UniTask.WhenAll(taskList);
+            var clips = await Addressables.LoadAssetsAsync<AudioClip>(variables.BgSoundsBundle, null, true);
+
+            foreach(var clip in clips)
+            {
+                clip.LoadAudioData();
+            }
 
             ShowAdv();
         }

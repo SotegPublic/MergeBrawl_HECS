@@ -15,13 +15,23 @@ namespace Systems
     {
         public void CommandReact(Trigger2dEnterCommand command)
         {
-            if (command.Collider.TryGetActorFromCollision(out var actor))
+            CheckContacts(command.Collider);
+        }
+
+        public void CommandReact(TriggerStay2DCommand command)
+        {
+            CheckContacts(command.Collider);
+        }
+
+        private void CheckContacts(Collider2D collider)
+        {
+            if (collider.TryGetActorFromCollision(out var actor))
             {
                 if (!actor.Entity.ContainsMask<IsOnSceneTagComponent>())
                     return;
 
-                using var contacts = HECSPooledArray<ContactPoint2D>.GetArray(128);               
-                var contactsCount = command.Collider.GetContacts(contacts.Items);
+                using var contacts = HECSPooledArray<ContactPoint2D>.GetArray(128);
+                var contactsCount = collider.GetContacts(contacts.Items);
 
                 if (contactsCount > 0)
                 {
@@ -35,39 +45,6 @@ namespace Systems
                         if (colliderActor.Entity.ContainsMask<IsOnSceneTagComponent>())
                         {
                             if (actor.Entity.GetComponent<UpgradeRootIndexComponent>().UpgradeLevel != colliderActor.Entity.GetComponent<UpgradeRootIndexComponent>().UpgradeLevel)
-                            {
-                                Owner.World.Command(new EndGameCommand());
-                                Owner.World.Command(new FXSoundCommand { FXActionId = ActionIdentifierMap.GameOver });
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        public void CommandReact(TriggerStay2DCommand command)
-        {
-            if (command.Collider.TryGetActorFromCollision(out var actor))
-            {
-                if (!actor.Entity.ContainsMask<IsOnSceneTagComponent>())
-                    return;
-
-                using var contacts = HECSPooledArray<ContactPoint2D>.GetArray(128);
-                var contactsCount = command.Collider.GetContacts(contacts.Items);
-
-                if (contactsCount > 0)
-                {
-                    for(int i = 0; i < contactsCount; i++)
-                    {
-                        if (contacts.Items[i].collider == null) 
-                            continue;
-                        if (!contacts.Items[i].collider.TryGetActorFromCollision(out var colliderActor))
-                            continue;
-
-                        if (colliderActor.Entity.ContainsMask<IsOnSceneTagComponent>())
-                        {
-                            if(actor.Entity.GetComponent<UpgradeRootIndexComponent>().UpgradeLevel != colliderActor.Entity.GetComponent<UpgradeRootIndexComponent>().UpgradeLevel)
                             {
                                 Owner.World.Command(new EndGameCommand());
                                 Owner.World.Command(new FXSoundCommand { FXActionId = ActionIdentifierMap.GameOver });

@@ -41,6 +41,7 @@ namespace Systems
             }
 
             Owner.World.Command(new ChangeSoundMuteCommand { IsSoundOff = playerProgress.IsSoundOff });
+            Owner.World.Command(new SetLanguageCommand { LanguageType = playerProgress.CurrentLanguage });
 
             EndState();
         }
